@@ -1,31 +1,31 @@
 import { roundDegree, formatDate, mpsToKmh, metersToKm, capitalize } from "./convertUnits.js";
-import CallApi from "./callApi.js";
+import {handleError} from "./handleError.js";
 
-export const currentWeatherData = async (data) => {
+export const currentWeatherData = async (response) => {
     const currentWeatherIcon = document.querySelector(".current-weather-icon");
     const currentWeatherTemperature = document.querySelector(".current-weather-temperature");
     const currentWeatherDescription = document.querySelector(".current-weather-description");
     const currentLocation = document.querySelector(".current-location");
     const currentDate = document.querySelector(".current-date");
-
     const windSpeedValue = document.querySelector(".wind-speed-value");
     const pressureValue = document.querySelector(".pressure-value");
     const sunriseValue = document.querySelector(".sunrise-value");
     const humidityValue = document.querySelector(".humidity-value");
     const visibilityValue = document.querySelector(".visibility-value");
     const sunsetValue = document.querySelector(".sunset-value");
-
-
-
-    const response = await CallApi(data);
-    //5.1 Dia diem khong ton tai
-    if(response.message === "city not found") {
-        throw new Error(`Địa điểm không tồn tại`);
-
+    //7 Kiem tra du lieu
+    if(response?.message === "city not found") {
+        //7.1 Bao dia diem  diem khong ton tai
+        await handleError(
+            //7.1.1 Hien thi dia diem khong ton tai
+            "Địa điểm không tồn tại",
+            "Try Again"
+        );
     }else {
-        //6.Du lieu thoi tiet
+        //8.Du lieu thoi tiet
         currentWeatherIcon.src = `src/img/animated/${response.weather[0].icon}.svg`;
         currentWeatherTemperature.innerHTML = await roundDegree(response.main.temp);
+        console.log(currentWeatherTemperature.textContent)
         currentWeatherDescription.innerHTML = await capitalize(response.weather[0].description);
         currentLocation.innerHTML = response.name;
         currentDate.innerHTML = await formatDate(response.dt);
