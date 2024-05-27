@@ -55,16 +55,32 @@
         />
       </svg>
     </div>
-    <input class="search-box-input" placeholder="Nhập tên thành phố cần xem thời tiết" type="text" tabindex="1" />
-
+    <input class="search-box-input" placeholder="current location" type="text" tabindex="1" />
+    <div class="gps-button" tabindex="2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+                d="M12.3183 3.02096C13.2834 3.14866 14.0047 3.97164 14.0047 4.94523V6.32812C15.7135 6.9321 17.0679 8.28647 17.6719 9.9953H19.0548C20.0284 9.9953 20.8513 10.7166 20.979 11.6818C21.007 11.893 21.007 12.107 20.979 12.3183C20.8513 13.2834 20.0284 14.0047 19.0548 14.0047H17.6719C17.0679 15.7135 15.7135 17.0679 14.0047 17.6719V19.0548C14.0047 20.0284 13.2834 20.8513 12.3183 20.979C12.107 21.007 11.893 21.007 11.6818 20.979C10.7166 20.8513 9.9953 20.0284 9.9953 19.0548V17.6719C8.28647 17.0679 6.9321 15.7135 6.32812 14.0047H4.94523C3.97163 14.0047 3.14866 13.2834 3.02096 12.3183C2.99301 12.107 2.99301 11.893 3.02096 11.6818C3.14866 10.7166 3.97164 9.9953 4.94525 9.9953H6.32812C6.9321 8.28647 8.28647 6.9321 9.9953 6.32812V4.94525C9.9953 3.97164 10.7166 3.14866 11.6818 3.02096C11.893 2.99301 12.107 2.99301 12.3183 3.02096Z"
+                stroke="#0F172A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M9.5 12C9.5 10.6193 10.6193 9.5 12 9.5C13.3807 9.5 14.5 10.6193 14.5 12C14.5 13.3807 13.3807 14.5 12 14.5C10.6193 14.5 9.5 13.3807 9.5 12Z"
+                stroke="#0F172A"
+                stroke-width="1.5"
+        />
+      </svg>
+    </div>
   </div>
+<!--  <div class="theme-button" tabindex="3"></div>-->
 </div>
 <div class="heading">Today Overview</div>
 <div class="current-weather-section">
   <div class="current-weather-card">
-    <img class="current-weather-icon dynamic-data " />
-    <div class="current-weather-temperature dynamic-data ">&nbsp;</div>
-    <div class="current-weather-description dynamic-data ">&nbsp;</div>
+    <img class="current-weather-icon dynamic-data loading" />
+    <div class="current-weather-temperature dynamic-data loading">&nbsp;</div>
+    <div class="current-weather-description dynamic-data loading">&nbsp;</div>
     <div class="divider"></div>
     <div class="current-location-container">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +95,7 @@
                 stroke-width="1.5"
         />
       </svg>
-      <div class="current-location dynamic-data ">&nbsp;</div>
+      <div class="current-location dynamic-data loading">&nbsp;</div>
     </div>
     <div class="current-date-container">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +108,7 @@
                 fill="#0F172A"
         />
       </svg>
-      <div class="current-date dynamic-data ">&nbsp;</div>
+      <div class="current-date dynamic-data loading">&nbsp;</div>
     </div>
   </div>
   <div class="current-weather-details-left">
@@ -100,21 +116,21 @@
       <img src="src/img/animated/wind-speed.svg" class="wind-speed-icon" />
       <div class="wind-speed-details">
         <div class="wind-speed-title">Wind Speed</div>
-        <div class="wind-speed-value dynamic-data ">&nbsp;</div>
+        <div class="wind-speed-value dynamic-data loading">&nbsp;</div>
       </div>
     </div>
     <div class="pressure-card">
       <img src="src/img/animated/pressure.svg" class="pressure-icon" />
       <div class="pressure-details">
         <div class="pressure-title">Pressure</div>
-        <div class="pressure-value dynamic-data ">&nbsp;</div>
+        <div class="pressure-value dynamic-data loading">&nbsp;</div>
       </div>
     </div>
     <div class="sunrise-card">
       <img src="src/img/animated/sunrise.svg" class="sunrise-icon" />
       <div class="sunrise-details">
         <div class="sunrise-title">Sunrise</div>
-        <div class="sunrise-value dynamic-data ">&nbsp;</div>
+        <div class="sunrise-value dynamic-data loading">&nbsp;</div>
       </div>
     </div>
   </div>
@@ -123,21 +139,21 @@
       <img src="src/img/animated/humidity.svg" class="humidity-icon" />
       <div class="humidity-details">
         <div class="humidity-title">Humidity</div>
-        <div class="humidity-value dynamic-data ">&nbsp;</div>
+        <div class="humidity-value dynamic-data loading">&nbsp;</div>
       </div>
     </div>
     <div class="visibility-card">
       <img src="src/img/animated/visibility.svg" class="visibility-icon" />
       <div class="visibility-details">
         <div class="visibility-title">Visibility</div>
-        <div class="visibility-value dynamic-data ">&nbsp;</div>
+        <div class="visibility-value dynamic-data loading">&nbsp;</div>
       </div>
     </div>
     <div class="sunset-card">
       <img src="src/img/animated/sunset.svg" class="sunset-icon" />
       <div class="sunset-details">
         <div class="sunset-title">Sunset</div>
-        <div class="sunset-value dynamic-data ">&nbsp;</div>
+        <div class="sunset-value dynamic-data loading">&nbsp;</div>
       </div>
     </div>
   </div>
@@ -195,6 +211,8 @@
     </svg>
   </div>
 </div>
+<script type="module" src="src/js/toggleTheme.js"></script>
 <script type="module" src="src/js/weatherApp.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
