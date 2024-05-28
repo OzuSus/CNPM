@@ -4,23 +4,20 @@ import { currentWeatherData } from "./currentWeatherData.js";
 import callApi from "./callApi.js";
 
 const searchBoxInput = document.querySelector(".search-box-input");
-// 3.Xu ly du lieu
+// 3.Xử lý dữ liệu
 searchBoxInput.addEventListener("keyup", async (event) => {
     if (event.keyCode === 13) { // Code of enter
-        // 4. Kiem tra du lieu
+        // 4.checkValue(data)
         if(!checkValue(searchBoxInput.value)) {
-            //4.1 bao loi du lieu trong
+            //5.1 Báo lỗi dữ liệu trống
             handleError(
-                //4.1.1 Hien thi vui long nhap ten thanh pho
                 "Vui lòng nhập tên thành phố!.",
                 "Refresh Page"
             )
         }else {
-            console.log("dang ket noi xuong api")
-            //5 ket noi xuong api
-            //5.1 Tra ve du lieu
+            //5 callApi(data)
             const response = await callApi(searchBoxInput.value);
-            //6 Gui du lieu
+            //6 currentWeatherData(response)
             await currentWeatherData(response)
         }
     }
