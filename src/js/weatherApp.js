@@ -83,7 +83,7 @@ const getUserLocation = async () => {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 };
 gpsButton.addEventListener("click", getUserLocation);
-getUserLocation();
+// getUserLocation();
 
 
 const topButton = document.querySelector(".top-button");
