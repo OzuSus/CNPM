@@ -13,11 +13,10 @@ export const currentWeatherData = async (response) => {
     const humidityValue = document.querySelector(".humidity-value");
     const visibilityValue = document.querySelector(".visibility-value");
     const sunsetValue = document.querySelector(".sunset-value");
-    //7 Kiem tra du lieu
+    //7 Kiểm tra dữ liệu
     if(response?.message === "city not found") {
-        //7.1 Bao dia diem  diem khong ton tai
+        //8.1 Báo địa điểm không tồn tại
         await handleError(
-            //7.1.1 Hien thi dia diem khong ton tai
             "Địa điểm không tồn tại",
             "Try Again"
         );

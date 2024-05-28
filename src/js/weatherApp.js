@@ -6,6 +6,7 @@ import {endLoadingState, startLoadingState} from "./setLoadingState.js";
 import {createDailyCards, createHourlyCards} from "./weatherForecastCards.js";
 
 const searchBoxInput = document.querySelector(".search-box-input");
+
 createHourlyCards();
 createDailyCards();
 
