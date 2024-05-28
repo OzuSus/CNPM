@@ -1,7 +1,7 @@
 import { filterForecastData } from "./filterForecastData.js";
 import { roundDegree, formatDate } from "./convertUnits.js";
 
-export const weatherForecastData = async (data) => {
+export const weatherForecastData = async (response) => {
   const hourlyWeatherForecastDate = document.querySelectorAll(".hourly-weather-forecast-date");
   const hourlyWeatherForecastTime = document.querySelectorAll(".hourly-weather-forecast-time");
   const hourlyWeatherForecastTemperature = document.querySelectorAll(".hourly-weather-forecast-temperature");
@@ -11,17 +11,6 @@ export const weatherForecastData = async (data) => {
   const dailyWeatherForecastIcon = document.querySelectorAll(".daily-weather-forecast-icon");
   const dailyWeatherForecastTemperature = document.querySelectorAll(".daily-weather-forecast-temperature");
   const dailyWeatherForecastDescription = document.querySelectorAll(".daily-weather-forecast-description");
-
-  let API_URL;
-  const API_KEY = "66251d0370e6ab0032d63bffb24c2d95";
-
-  if (data.lat && data.lon) {
-    API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${data.lat}&lon=${data.lon}&appid=${API_KEY}&units=metric`;
-  } else {
-    API_URL = `https://api.openweathermap.org/data/2.5/forecast?q=${data}&appid=${API_KEY}&units=metric`;
-  }
-
-  const response = await fetch(API_URL);
 
   if (!response.ok) {
     if (response.status === 404) {
