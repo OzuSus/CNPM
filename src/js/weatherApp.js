@@ -1,7 +1,7 @@
 import { handleError } from "./handleError.js";
 import { currentWeatherData } from "./currentWeatherData.js";
 import { weatherForecastData } from "./weatherForecastData.js";
-import callApi from "./callApi.js";
+import {callApi, callApiForecast} from "./callApi.js";
 import {endLoadingState, startLoadingState} from "./setLoadingState.js";
 import {createDailyCards, createHourlyCards} from "./weatherForecastCards.js";
 
@@ -25,13 +25,14 @@ searchBoxInput.addEventListener("keyup", async (event) => {
             console.log("dang ket noi xuong api")
             //5 ket noi xuong api
             //5.1 Tra ve du lieu
-            const response = await callApi(searchBoxInput.value);
+            let response = await callApi(searchBoxInput.value);
             //6 Gui du lieu
             await currentWeatherData(response)
 
             try {
+                let response = await callApiForecast(searchBoxInput.value);
                 await startLoadingState();
-                await weatherForecastData(searchBoxInput.value);
+                await weatherForecastData(response);
                 await endLoadingState();
             } catch (error) {
                 if (error.message === "Failed to fetch") {
