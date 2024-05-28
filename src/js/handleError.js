@@ -13,8 +13,8 @@ export const handleError = async (error, event) => {
   alertIcon.innerHTML = themeIcons.alert;
 
   alertMessage.classList.add("alert-message");
-  //6.1 Hiển thị "Vui lòng nhập tên thành phố"
-  //9.1 Hiển thị "Địa điểm không tồn tại"
+  //UC-01 6.1 Hiển thị "Vui lòng nhập tên thành phố"
+  //UC-01 9.1 Hiển thị "Địa điểm không tồn tại"
   alertMessage.innerHTML = error;
 
   alertButton.classList.add("alert-button");

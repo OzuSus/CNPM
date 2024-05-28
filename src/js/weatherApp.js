@@ -9,24 +9,21 @@ const searchBoxInput = document.querySelector(".search-box-input");
 
 createHourlyCards();
 createDailyCards();
-
-// 3.Xu ly du lieu
+//UC-01 3.Xử lý dữ liệu
 searchBoxInput.addEventListener("keyup", async (event) => {
     if (event.keyCode === 13) { // Code of enter
-        // 4. Kiem tra du lieu
+        //UC-01 4.checkValue(data)
         if(!checkValue(searchBoxInput.value)) {
-            //4.1 bao loi du lieu trong
+            //UC-01 5.1 Báo lỗi dữ liệu trống
             handleError(
                 //4.1.1 Hien thi vui long nhap ten thanh pho
                 "Vui lòng nhập tên thành phố!.",
                 "Refresh Page"
             )
         }else {
-            console.log("dang ket noi xuong api")
-            //5 ket noi xuong api
-            //5.1 Tra ve du lieu
-            let response = await callApi(searchBoxInput.value);
-            //6 Gui du lieu
+            // UC-01 5 callApi(data)
+            const response = await callApi(searchBoxInput.value);
+            // UC-01 6 currentWeatherData(response)
             await currentWeatherData(response)
 
             try {
