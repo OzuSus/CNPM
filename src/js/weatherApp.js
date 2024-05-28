@@ -6,7 +6,6 @@ import {endLoadingState, startLoadingState} from "./setLoadingState.js";
 import {createDailyCards, createHourlyCards} from "./weatherForecastCards.js";
 
 const searchBoxInput = document.querySelector(".search-box-input");
-
 createHourlyCards();
 createDailyCards();
 
@@ -60,8 +59,9 @@ const getUserLocation = async () => {
         //6 Gui du lieu
         await currentWeatherData(response)
         try {
+            const response = await callApiForecast(data);
             await startLoadingState();
-            await weatherForecastData(data);
+            await weatherForecastData(response);
             await endLoadingState();
         } catch (error) {
             if (error.message === "Failed to fetch") {
@@ -83,7 +83,7 @@ const getUserLocation = async () => {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 };
 gpsButton.addEventListener("click", getUserLocation);
-// getUserLocation();
+getUserLocation();
 
 
 const topButton = document.querySelector(".top-button");
