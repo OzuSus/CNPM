@@ -13,15 +13,15 @@ export const currentWeatherData = async (response) => {
     const humidityValue = document.querySelector(".humidity-value");
     const visibilityValue = document.querySelector(".visibility-value");
     const sunsetValue = document.querySelector(".sunset-value");
-    //7 Kiểm tra dữ liệu
+    // UC-01 7 Kiểm tra dữ liệu
     if(response?.message === "city not found") {
-        //8.1 Báo địa điểm không tồn tại
+        // UC-01 8.1 Báo địa điểm không tồn tại
         await handleError(
             "Địa điểm không tồn tại",
             "Try Again"
         );
     }else {
-        //8.Du lieu thoi tiet
+        //UC-01 8 Dữ liệu thời tiết
         currentWeatherIcon.src = `src/img/animated/${response.weather[0].icon}.svg`;
         currentWeatherTemperature.innerHTML = await roundDegree(response.main.temp);
         console.log(currentWeatherTemperature.textContent)
