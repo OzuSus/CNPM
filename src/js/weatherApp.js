@@ -13,8 +13,10 @@ createDailyCards();
 searchBoxInput.addEventListener("keyup", async (event) => {
     if (event.keyCode === 13) { // Code of enter
         //UC-01 4.checkValue(data)
+        //UC-04: 4.2 checkValue(data)
         if(!checkValue(searchBoxInput.value)) {
             //UC-01 5.1 Báo lỗi dữ liệu trống
+            //UC-04: 4.2.1 Bao loi du lieu
             handleError(
                 //4.1.1 Hien thi vui long nhap ten thanh pho
                 "Vui lòng nhập tên thành phố!.",
@@ -22,13 +24,17 @@ searchBoxInput.addEventListener("keyup", async (event) => {
             )
         }else {
             // UC-01 5 callApi(data)
+            //UC-04 4.3 callApi(data)
             const response = await callApi(searchBoxInput.value);
             // UC-01 6 currentWeatherData(response)
+            // UC-04: 4.5 currentWeatherData(response)
             await currentWeatherData(response)
 
             try {
+                //UC-04: 4.7 callApiForecast(value)
                 let response = await callApiForecast(searchBoxInput.value);
                 await startLoadingState();
+                //UC-04: 4.9 weatherForecastData(respone)
                 await weatherForecastData(response);
                 await endLoadingState();
             } catch (error) {
