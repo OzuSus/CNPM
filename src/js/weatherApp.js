@@ -100,5 +100,91 @@ const checkValue = (valueInput) => {
     }
     return true;
 }
+// tro ly ao
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+const synth = window.speechSynthesis;
+recognition.lang = 'vi-VI';
+recognition.continuous = false;
+
+const microphone = document.querySelector('.microphone');
+
+const speak = (text) => {
+    if (synth.speaking) {
+        console.error('Busy. Speaking...');
+        return;
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+
+    utter.onend = () => {
+        console.log('SpeechSynthesisUtterance.onend');
+    }
+    utter.onerror = (err) => {
+        console.error('SpeechSynthesisUtterance.onerror', err);
+    }
+
+    synth.speak(utter);
+};
+function simulateKeyUpWithEnter() {
+    const event = new KeyboardEvent('keyup', {
+        keyCode: 13,
+        which: 13,
+        key: 'Enter',
+        code: 'Enter',
+        bubbles: true
+    });
+    searchBoxInput.dispatchEvent(event);
+}
+const handleVoice = (text) => {
+    console.log('text', text);
+
+    // "thời tiết tại Đà Nẵng" => ["thời tiết tại", "Đà Nẵng"]
+    const handledText = text.toLowerCase();
+    if (handledText.includes('thời tiết tại')) {
+        const location = handledText.split('tại')[1].trim();
+        console.log('location', location);
+        searchBoxInput.value = location;
+        simulateKeyUpWithEnter();
+    }else {
+        console.log('location', location);
+        searchBoxInput.value = handledText;
+        simulateKeyUpWithEnter();
+    }
+
+    const container = document.querySelector('.container');
+
+
+    if (handledText.includes('mấy giờ')) {
+        const textToSpeech = `${moment().hours()} hours ${moment().minutes()} minutes`;
+        speak(textToSpeech);
+        return;
+    }
+
+    speak('Try again');
+}
+
+microphone.addEventListener('click', (e) => {
+    e.preventDefault();
+    recognition.start();
+    microphone.classList.add('recording');
+});
+
+recognition.onspeechend = () => {
+    recognition.stop();
+    microphone.classList.remove('recording');
+}
+
+recognition.onerror = (err) => {
+    console.error(err);
+    microphone.classList.remove('recording');
+}
+
+recognition.onresult = (e) => {
+    console.log('onresult', e);
+    const text = e.results[0][0].transcript;
+    handleVoice(text);
+}
 
 
