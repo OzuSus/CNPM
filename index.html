@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
   <title>Weather</title>
   <link rel="stylesheet" href="src/scss/main.scss" />
+  <link rel="stylesheet" href="src/css/main.css">
   <link rel="shortcut icon" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="header">
@@ -55,8 +57,25 @@
         />
       </svg>
     </div>
-<!--4.1 Nhap thong tin dia diem vao checkbox-->
+<!--    UC-04: //4.1 Nhap thong tin thoi tiet vao input hoac su dung microphone.-->
     <input class="search-box-input" placeholder="current location" type="text" tabindex="1" />
+    <div class="microphone" tabindex="2">
+      <svg width="24px" height="24px" viewBox="0 0 32 32"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="icomoon-ignore">
+        </g>
+        <path d="M16.003 22.377c3.231 0 5.851-2.619 5.851-5.851v-10.639c0-3.231-2.62-5.85-5.851-5.85s-5.851 2.619-5.851 5.85v10.639c0 3.231 2.62 5.851 5.851 5.851zM11.216 5.888c0-2.639 2.147-4.786 4.787-4.786s4.787 2.147 4.787 4.786v10.639c0 2.64-2.147 4.787-4.787 4.787s-4.787-2.147-4.787-4.787v-10.639z" fill="#000000">
+
+        </path>
+        <path d="M23.978 11.207v5.319c0 4.399-3.579 7.978-7.978 7.978s-7.978-3.579-7.978-7.978v-5.319h-1.064v5.319c0 4.83 3.81 8.776 8.581 9.018h-0.068v5.354h-4.79v1.064h10.637v-1.064h-4.784v-5.354h-0.073c4.771-0.243 8.581-4.189 8.581-9.018v-5.319h-1.064z" fill="#000000">
+
+        </path>
+      </svg>
+      <div class="recording-icon" tabindex="2">
+        <svg fill="#000000" width="24px" height="24px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+          <path d="M960 0c529.36 0 960 430.645 960 960 0 529.36-430.64 960-960 960-529.355 0-960-430.64-960-960C0 430.645 430.645 0 960 0Zm0 112.941c-467.125 0-847.059 379.934-847.059 847.059 0 467.12 379.934 847.06 847.059 847.06 467.12 0 847.06-379.94 847.06-847.06 0-467.125-379.94-847.059-847.06-847.059Zm0 313.726c294.55 0 533.33 238.781 533.33 533.333 0 294.55-238.78 533.33-533.33 533.33-294.552 0-533.333-238.78-533.333-533.33 0-294.552 238.781-533.333 533.333-533.333Z" fill-rule="evenodd"/>
+        </svg>
+      </div>
+    </div>
     <div class="gps-button" tabindex="2">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path

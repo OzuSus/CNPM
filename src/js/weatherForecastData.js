@@ -21,11 +21,9 @@ export const weatherForecastData = async (response) => {
       );
     }
   }
-
   const weatherForecastData = await response.json();
-
   await filterForecastData(weatherForecastData);
-
+  //UC-04: 4.10 Tra ve thong tin du bao thoi tiet vao index.html
   for (let index = 0; index < 5; index++) {
     hourlyWeatherForecastDate[index].innerHTML = await formatDate(weatherForecastData.list[index].dt, "day");
     hourlyWeatherForecastTime[index].innerHTML = await formatDate(weatherForecastData.list[index].dt, "hour");

@@ -1,6 +1,5 @@
 import { roundDegree, formatDate, mpsToKmh, metersToKm, capitalize } from "./convertUnits.js";
 import {handleError} from "./handleError.js";
-
 export const currentWeatherData = async (response) => {
     const currentWeatherIcon = document.querySelector(".current-weather-icon");
     const currentWeatherTemperature = document.querySelector(".current-weather-temperature");
@@ -16,12 +15,14 @@ export const currentWeatherData = async (response) => {
     // UC-01 7 Kiểm tra dữ liệu
     if(response?.message === "city not found") {
         // UC-01 8.1 Báo địa điểm không tồn tại
+        //UC-04: 4.5.1 handleError(error, event)
         await handleError(
             "Địa điểm không tồn tại",
             "Try Again"
         );
     }else {
         //UC-01 8 Dữ liệu thời tiết
+        //UC-04: 4.6 Tra ve thong tin thoi tiet hien tai vao index.html
         currentWeatherIcon.src = `src/img/animated/${response.weather[0].icon}.svg`;
         currentWeatherTemperature.innerHTML = await roundDegree(response.main.temp);
         console.log(currentWeatherTemperature.textContent)

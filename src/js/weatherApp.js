@@ -13,8 +13,10 @@ createDailyCards();
 searchBoxInput.addEventListener("keyup", async (event) => {
     if (event.keyCode === 13) { // Code of enter
         //UC-01 4.checkValue(data)
+        //UC-04: 4.2 checkValue(data)
         if(!checkValue(searchBoxInput.value)) {
             //UC-01 5.1 Báo lỗi dữ liệu trống
+            //UC-04: 4.2.1 Bao loi du lieu
             handleError(
                 //4.1.1 Hien thi vui long nhap ten thanh pho
                 "Vui lòng nhập tên thành phố!.",
@@ -22,13 +24,17 @@ searchBoxInput.addEventListener("keyup", async (event) => {
             )
         }else {
             // UC-01 5 callApi(data)
+            //UC-04 4.3 callApi(data)
             const response = await callApi(searchBoxInput.value);
             // UC-01 6 currentWeatherData(response)
+            // UC-04: 4.5 currentWeatherData(response)
             await currentWeatherData(response)
 
             try {
+                //UC-04: 4.7 callApiForecast(value)
                 let response = await callApiForecast(searchBoxInput.value);
                 await startLoadingState();
+                //UC-04: 4.9 weatherForecastData(respone)
                 await weatherForecastData(response);
                 await endLoadingState();
             } catch (error) {
@@ -99,6 +105,92 @@ const checkValue = (valueInput) => {
         return false;
     }
     return true;
+}
+// tro ly ao
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+const synth = window.speechSynthesis;
+recognition.lang = 'vi-VI';
+recognition.continuous = false;
+
+const microphone = document.querySelector('.microphone');
+
+const speak = (text) => {
+    if (synth.speaking) {
+        console.error('Busy. Speaking...');
+        return;
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+
+    utter.onend = () => {
+        console.log('SpeechSynthesisUtterance.onend');
+    }
+    utter.onerror = (err) => {
+        console.error('SpeechSynthesisUtterance.onerror', err);
+    }
+
+    synth.speak(utter);
+};
+function simulateKeyUpWithEnter() {
+    const event = new KeyboardEvent('keyup', {
+        keyCode: 13,
+        which: 13,
+        key: 'Enter',
+        code: 'Enter',
+        bubbles: true
+    });
+    searchBoxInput.dispatchEvent(event);
+}
+const handleVoice = (text) => {
+    console.log('text', text);
+
+    // "thời tiết tại Đà Nẵng" => ["thời tiết tại", "Đà Nẵng"]
+    const handledText = text.toLowerCase();
+    if (handledText.includes('thời tiết tại')) {
+        const location = handledText.split('tại')[1].trim();
+        console.log('location', location);
+        searchBoxInput.value = location;
+        simulateKeyUpWithEnter();
+    }else {
+        console.log('location', location);
+        searchBoxInput.value = handledText;
+        simulateKeyUpWithEnter();
+    }
+
+    const container = document.querySelector('.container');
+
+
+    if (handledText.includes('mấy giờ')) {
+        const textToSpeech = `${moment().hours()} hours ${moment().minutes()} minutes`;
+        speak(textToSpeech);
+        return;
+    }
+
+    speak('Try again');
+}
+
+microphone.addEventListener('click', (e) => {
+    e.preventDefault();
+    recognition.start();
+    microphone.classList.add('recording');
+});
+
+recognition.onspeechend = () => {
+    recognition.stop();
+    microphone.classList.remove('recording');
+}
+
+recognition.onerror = (err) => {
+    console.error(err);
+    microphone.classList.remove('recording');
+}
+
+recognition.onresult = (e) => {
+    console.log('onresult', e);
+    const text = e.results[0][0].transcript;
+    handleVoice(text);
 }
 
 

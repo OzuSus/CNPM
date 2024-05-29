@@ -1,3 +1,4 @@
+// UC-04: 4.4 Tra ve response dang Json
 export async function callApi(data)
 {
     const API_KEY = "66251d0370e6ab0032d63bffb24c2d95";
@@ -12,6 +13,7 @@ export async function callApi(data)
     const response = await fetch(API_URL);
     return response.json()
 }
+// UC-04: 4.8 Tra ve response
 export async function callApiForecast(data)
 {
     const API_KEY = "66251d0370e6ab0032d63bffb24c2d95";
