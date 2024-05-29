@@ -8,6 +8,7 @@ import { weatherForecastData } from "./weatherForecastData.js";
 
 const searchBoxInput = document.querySelector(".search-box-input");
 const gpsButton = document.querySelector(".gps-button");
+const microphoneButton = document.querySelector(".microphone-button");
 const topButton = document.querySelector(".top-button");
 
 createHourlyCards();
@@ -88,3 +89,9 @@ gpsButton.addEventListener("click", getUserLocation);
 topButton.addEventListener("click", scrollToTop);
 
 getUserLocation();
+microphoneButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  recognition.start();
+  microphoneButton.classList.add('recording');
+});

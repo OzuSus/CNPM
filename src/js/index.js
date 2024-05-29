@@ -1,7 +1,7 @@
 // Tro ly ao
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-
+const SpeechRecognition = SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
+recognition.start();
 const synth = window.speechSynthesis;
 recognition.lang = 'vi-VI';
 recognition.continuous = false;
@@ -41,24 +41,6 @@ const handleVoice = (text) => {
         return;
     }
 
-    const container = document.querySelector('.container');
-    if (handledText.includes('thay đổi màu nền')) {
-        const color = handledText.split('màu nền')[1].trim();
-        container.style.background = color;
-        return;
-    }
-
-    if (handledText.includes('màu nền mặc định')) {
-        container.style.background = '';
-        return;
-    }
-
-    if (handledText.includes('mấy giờ')) {
-        const textToSpeech = `${moment().hours()} hours ${moment().minutes()} minutes`;
-        speak(textToSpeech);
-        return;
-    }
-
     speak('Try again');
 }
 
@@ -81,6 +63,6 @@ recognition.onerror = (err) => {
 
 recognition.onresult = (e) => {
     console.log('onresult', e);
-    const text = e.results[0][0].transcript;
+    const text = e.result[0][0].transcript;
     handleVoice(text);
 }
