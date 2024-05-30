@@ -10,13 +10,16 @@ const searchBoxInput = document.querySelector(".search-box-input");
 createHourlyCards();
 createDailyCards();
 //UC-01 3.Xử lý dữ liệu
+//UC-02 3.Xử lý dữ liệu search
 searchBoxInput.addEventListener("keyup", async (event) => {
     if (event.keyCode === 13) { // Code of enter
         //UC-01 4.checkValue(data)
+        //UC-02 4.checkValue(data)
         //UC-04: 4.2 checkValue(data)
         if(!checkValue(searchBoxInput.value)) {
             //UC-01 5.1 Báo lỗi dữ liệu trống
             //UC-04: 4.2.1 Bao loi du lieu
+            //UC-02: 2.1 báo lõi địa đểm không tôn tại
             handleError(
                 //4.1.1 Hien thi vui long nhap ten thanh pho
                 "Vui lòng nhập tên thành phố!.",
@@ -32,9 +35,11 @@ searchBoxInput.addEventListener("keyup", async (event) => {
 
             try {
                 //UC-04: 4.7 callApiForecast(value)
+                //UC-02: 4.7 gọi dêến API lấy dữ liẹu
                 let response = await callApiForecast(searchBoxInput.value);
                 await startLoadingState();
                 //UC-04: 4.9 weatherForecastData(respone)
+                //UC-02: 4.9 lấy d liệu bên weatherForecastData sau khi gọi data từ API
                 await weatherForecastData(response);
                 await endLoadingState();
             } catch (error) {
@@ -51,23 +56,28 @@ searchBoxInput.addEventListener("keyup", async (event) => {
     }
 });
 
-//lay vi tri hien tai cua nguoi dung
+//UC 02-lay vi tri hien tai cua nguoi dung
 const gpsButton = document.querySelector(".gps-button");
 const getUserLocation = async () => {
     const successCallback = async (position) => {
         const data = {
+            //UC-02 1. Lấy dâata v trí hện tại
             lat: position.coords.latitude,
             lon: position.coords.longitude,
         };
+        //UC-02 2.gọi API
         const response = await callApi(data);
-        //6 Gui du lieu
+        //UC-02 3.Gui du lieu thời tiết hiện tại
         await currentWeatherData(response)
         try {
+            //UC-02 4.goi API du báo thời tiết
             const response = await callApiForecast(data);
             await startLoadingState();
+            //UC-02 5.trả về data
             await weatherForecastData(response);
             await endLoadingState();
         } catch (error) {
+            //UC-02 6.báo lỗi nếu ko kết nối được
             if (error.message === "Failed to fetch") {
                 await handleError(
                     "Uh oh! It looks like you're not connected to the internet. Please check your connection and try again.",

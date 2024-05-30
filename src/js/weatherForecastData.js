@@ -14,6 +14,7 @@ export const weatherForecastData = async (response) => {
 
   if (!response.ok) {
     if (response.status === 404) {
+      //UC-02 báo lôỗi nếu không timf thấy ịa điểm
       throw new Error(`Rat tiet, he thong khong tim thay ${data}. Vui long kiem tra lai dia diem`);
     } else {
       throw new Error(
@@ -24,6 +25,7 @@ export const weatherForecastData = async (response) => {
   const weatherForecastData = await response.json();
   await filterForecastData(weatherForecastData);
   //UC-04: 4.10 Tra ve thong tin du bao thoi tiet vao index.html
+  //UC-02: 5 Tra ve thong tin du bao thoi tiet vao index.html
   for (let index = 0; index < 5; index++) {
     hourlyWeatherForecastDate[index].innerHTML = await formatDate(weatherForecastData.list[index].dt, "day");
     hourlyWeatherForecastTime[index].innerHTML = await formatDate(weatherForecastData.list[index].dt, "hour");

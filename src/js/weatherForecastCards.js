@@ -1,4 +1,5 @@
 export const createHourlyCards = () => {
+  //UC-02 tạo khung cho phân dự báo thời tiết
   const hourlyWeatherForecastSection = document.querySelector(".hourly-weather-forecast-section");
 
   for (let i = 0; i < 5; i++) {
