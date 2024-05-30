@@ -15,6 +15,7 @@ export const handleError = async (error, event) => {
   alertMessage.classList.add("alert-message");
   //UC-01 6.1 Hiển thị "Vui lòng nhập tên thành phố"
   //UC-01 9.1 Hiển thị "Địa điểm không tồn tại"
+  //UC-02 2.1 Hiển thị "Địa điểm không tồn tại"
   alertMessage.innerHTML = error;
 
   alertButton.classList.add("alert-button");
